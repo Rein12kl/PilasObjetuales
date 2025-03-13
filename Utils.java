@@ -40,7 +40,7 @@ public class Utils {
         }
     }
 
-    public String Eliminar(Stack<Vehiculo> pila)
+    public Stack<Vehiculo> Eliminar(Stack<Vehiculo> pila)
     {
         boolean eliminar = false;
 
@@ -52,18 +52,51 @@ public class Utils {
         {
             if (o.getMarca().equalsIgnoreCase(dato))
             {
-                pila.pop();
-                eliminar = true;
+                pila.remove(o);
+                System.out.println("registro eliminado");
+            }
+
+            else 
+            {
+                System.out.println("Registro no eliminado");
             }
         }
-        if (eliminar){
-            dato = "Registro eliminado";
+
+        return pila;
+    }
+
+    public void AccionRegistro (Stack<Vehiculo> pila,int opt){
+        String dato;
+
+        dato = JOptionPane.showInputDialog("Ingrese el registro a realizar accion");
+        switch (opt) {
+            case 1:
+                dato = JOptionPane.showInputDialog("Ingrese el registro a consultar");
+                for (Vehiculo o : pila) {
+                    if(o.getMarca().equalsIgnoreCase(dato)){
+                        System.out.println("El registro se encuentra y es: " + o.getMarca() + " " + o.getPrecio());
+                    }
+                }
+                break;
+
+            case 2:
+                for (Vehiculo vehiculo : pila) {
+                    pila.remove(vehiculo);
+                }
+                
+                break;
+
+            case 3:
+                
+                for (Vehiculo vehiculo : pila) {
+                    vehiculo.setMarca(JOptionPane.showInputDialog("ingrese la marca"));
+                }
+
+                break;                
+            
+            default:
+                break;
         }
 
-        else{
-            dato = "Registro no eliminado";
-        }
-
-        return dato;
     }
 }
